@@ -23,8 +23,6 @@ fixedSimple <- fixed %>% mutate(alignment =
                                   description == "Third" ~ 'Left'
                                 ))
 
-
-
 weightSimple <- weight %>% mutate(alignment =
                                 case_when(
                                   description == "Left-edge: First or second" |
@@ -39,17 +37,20 @@ weightSimple <- weight %>% mutate(alignment =
                                 ))
 
 
-
-fixedAndWeight <- bind_rows(weightSimple, fixedSimple) %>% left_join(languages, by = "wals.code")
+fixedAndWeight <- bind_rows(weightSimple, fixedSimple) %>%
+                  left_join(languages, by = "wals.code") %>%
+                  filter(.$alignment == "Left" |
+                          .$alignment == "Right")
 
 freqTabWorld <- table(fixedAndWeight$alignment)
 
-alignmentSA <- fixedAndWeight %>% filter(.$macroarea == "South America")
-
 # Proportions of alignment (left or right of the word) in languages of South America
 
+alignmentSA <- fixedAndWeight %>% filter(.$macroarea == "South America")
+
 freqTabSA <- table(alignmentSA$alignment)
-prop.table(freqTab)
+
+propTabSA <- prop.table(freqTab)
 
 # Proportions of placement within the window (trochaic or iambic)
 
@@ -69,4 +70,3 @@ fixedWindowSA <- fixedWindow %>% filter(.$macroarea == "South America")
 rhythmTabSA <- table(fixedWindowSA$rhythm)
 
 rhythmPropSA <- prop.table(rhythmTabSA)
-

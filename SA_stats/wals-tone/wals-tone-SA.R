@@ -5,17 +5,18 @@ languages <- read.delim("languoid.txt",
 
 toneValues <- read.delim("tone.txt",
                          fileEncoding = "UTF-8",
-                         skip = 7)
+                         skip = 7) %>%
+              left_join(languages, by = c("wals.code"))
 
-toneWithMacro <- toneValues %>% left_join(languages, by = c("wals.code"))
 
 
-toneSimple <- toneWithMacro %>% mutate(hasTone =
-                           if_else(.$description == "Complex tone system" | .$description == "Simple tone system",
-                                   'tone',
-                                   'no_tone'))
+toneSimple <- toneValues %>% mutate(hasTone =
+                           if_else(.$description == "Complex tone system" |
+                                   .$description == "Simple tone system",
+                                     'tone'))
 
-tone_SA <- toneSimple %>% filter(.$macroarea == "South America")
+tone_SA <- toneSimple %>%
+          filter(.$macroarea == "South America")
 
-freqTab <- table(tone_SA$hasTone)
-prop.table(freqTab)
+toneFreqTab <- table(tone_SA$hasTone)
+tonePropTab <- prop.table(freqTab)
