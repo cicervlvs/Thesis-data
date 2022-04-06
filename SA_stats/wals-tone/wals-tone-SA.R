@@ -8,8 +8,6 @@ toneValues <- read.delim("tone.txt",
                          skip = 7) %>%
               left_join(languages, by = c("wals.code"))
 
-
-
 toneSimple <- toneValues %>% mutate(hasTone =
                            if_else(.$description == "Complex tone system" |
                                    .$description == "Simple tone system",
@@ -25,8 +23,6 @@ simpCompToneSA <- toneValues %>% filter(.$macroarea == "South America")
 tabSimCompSA <- table(simpCompToneSA$description)
 tabSimCompSAOnlyTone <- table(simpCompToneSA$description,
                               exclude = "No tones")
-
-
 
 toneFreqTab <- table(tone_SA$hasTone)
 tonePropTab <- prop.table(freqTab)

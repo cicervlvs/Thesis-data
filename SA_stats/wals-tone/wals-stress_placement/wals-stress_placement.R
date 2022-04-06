@@ -5,11 +5,11 @@ languages <- read.delim("languoid.txt",
 
 fixed <- read.delim("wals-stress_placement/fixed.txt",
                          fileEncoding = "UTF-8",
-                         skip = 7) %>% select(name, wals.code, description)
+                         skip = 7) %>% select(name, wals.code, description, family)
 
 weight <- read.delim("wals-stress_placement/weight.txt",
                     fileEncoding = "UTF-8",
-                    skip = 7) %>% select(name, wals.code, description)
+                    skip = 7) %>% select(name, wals.code, description, family)
 
 
 
@@ -70,3 +70,30 @@ fixedWindowSA <- fixedWindow %>% filter(.$macroarea == "South America")
 rhythmTabSA <- table(fixedWindowSA$rhythm)
 
 rhythmPropSA <- prop.table(rhythmTabSA)
+
+# Proportions of stress types by family in SA
+
+fixedByFamilySA <- fixed %>%
+                  left_join(languages, by = "wals.code") %>%
+                  filter(.$macroarea == "South America") %>%
+                  filter(.$description != "No fixed stress")
+
+fixedByFamilyTabSA <- table(fixedByFamilySA$family)
+
+fixedByFamilySAUnique <- length(unique(fixedByFamilySA$family))
+
+weightByFamilySA <- weight %>%
+                  left_join(languages, by = "wals.code") %>%
+                  filter(.$macroarea == "South America") %>%
+                  filter(.$description != "Not predictable") %>%
+                  filter(.$description != "Fixed stress (no weight-sensitivity)")
+
+
+weightByFamilyTabSA <- table(weightByFamilySA$family)
+
+weightByFamilySAUnique <- length(unique(weightByFamilySA$family))
+
+unpredictByFamilySA <- weight %>%
+                  left_join(languages, by = "wals.code") %>%
+                  filter(.$macroarea == "South America") %>%
+                  filter(.$description == "Not predictable")
