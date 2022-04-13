@@ -5,3 +5,4 @@ Contains data used for my MA thesis. First, for background information, using da
 
 - Script to see how many languages in South America have tones, as per the WALS sample.
 - Script to see how many languages in South America have stress where, as per the WALS samples.
+- Various dataframe operations to design my database
