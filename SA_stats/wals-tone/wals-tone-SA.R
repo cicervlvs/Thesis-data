@@ -1,28 +1,34 @@
 library(dplyr)
 
-languages <- read.delim("languoid.txt",
-                        fileEncoding = "UTF-8") %>% select(wals.code, macroarea)
+languages <- read.delim("../languoid.txt",
+  fileEncoding = "UTF-8"
+) %>% select(wals.code, macroarea)
 
-toneValues <- read.delim("tone.txt",
-                         fileEncoding = "UTF-8",
-                         skip = 7) %>%
-              left_join(languages, by = c("wals.code"))
+tone_values <- read.delim("../tone.txt",
+  fileEncoding = "UTF-8",
+  skip = 7
+) %>%
+  left_join(languages, by = c("wals.code"))
 
-toneSimple <- toneValues %>% mutate(hasTone =
-                           if_else(.$description == "Complex tone system" |
-                                   .$description == "Simple tone system",
-                                     'tone',
-                                    'no tone'))
+tone_simple <- tone_values %>% mutate(
+  hasTone =
+    if_else(.$description == "Complex tone system" |
+      .$description == "Simple tone system",
+    "tone",
+    "no tone"
+    )
+)
 
-tone_SA <- toneSimple %>%
-          filter(.$macroarea == "South America")
+tone_sa <- tone_simple %>%
+  filter(.$macroarea == "South America")
 
-tabSimpCompTone <- table(toneValues$description)
+tab_simp_comp_tone <- table(tone_values$description)
 
-simpCompToneSA <- toneValues %>% filter(.$macroarea == "South America") 
-tabSimCompSA <- table(simpCompToneSA$description)
-tabSimCompSAOnlyTone <- table(simpCompToneSA$description,
-                              exclude = "No tones")
+simp_comp_tone_sa <- tone_values %>% filter(.$macroarea == "South America")
+tab_sim_comp_sa <- table(simp_comp_tone_sa$description)
+tab_sim_comp_sa_only_tone <- table(simp_comp_tone_sa$description,
+  exclude = "No tones"
+)
 
-toneFreqTab <- table(tone_SA$hasTone)
-tonePropTab <- prop.table(freqTab)
+tone_freq_tab <- table(tone_sa$hasTone)
+tone_prop_tab <- prop.table(tone_freq_tab)
