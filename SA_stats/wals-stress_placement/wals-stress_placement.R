@@ -84,7 +84,7 @@ prop_tab_sa <- prop.table(freq_tab_sa)
 
 # Proportions of placement within the window (trochaic or iambic)
 
-fixed_with_macro  <- fixed %>%
+fixed_with_macro  <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- fixed %>%
                   left_join(languages, by = "wals.code")
 
 fixed_window <- fixed_with_macro %>% mutate(rhythm =
