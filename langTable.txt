@@ -1,0 +1,61 @@
+Number	Language	Classification	Country	Column1	_1	_2	_3
+1	Machineri	Arawakan	Bolivia				
+2a	Trinitario	Rose(inprep.)	Bolivia				
+2b	Ignaciano	OlzaZubiri2002	Bolivia				
+3	Baure	Arawakan	Bolivia				
+4	Parecí	Arawakan	Brazil				
+5	Enawê-Nawê(Salumã)	Arawakan	Brazil				
+6	KawTaYo(Kuyubí)	Chapacuran	Brazil				
+7	Miguelenho	Chapacuran	Brazil				
+8	Moré(Itene)	Chapacuran	Bolivia				
+9	OroTowati(OroWin)	Chapacuran	Brazil				
+10	Wari’(Pakaanova)	Chapacuran	Brazil				
+11	Arikapú	Macro-Ge,Jabuti	Brazil				
+12	Djeoromitxi	Macro-Ge,Jabuti	Brazil				
+13	Rikbaktsá	Macro-Ge					
+14a	Latundê	Nambikwaran,					
+14b	Lakondê	North					
+15	Nambikwara	Nambikwaran,					
+16	Sararé	Nambikwaran,					
+17	Sabanê	Nambikwaran					
+18	Chácobo	Panoan					
+19	Pacahuara	Panoan					
+20	Kaxararí(Kaxarirí)	Panoan					
+21	Yaminahua	Panoan					
+22	EseEjja	Tacanan					
+23	Araona	Tacanan					
+24	Cavineña	Tacanan					
+25	Tacana	Tacanan					
+26	Maropa(Reyesano)	Tacanan					
+27	Yuki	Tupian,					
+28	Sirionó	Tupian,					
+29	Uru-eu-wau-wau	Tupian,					
+30	Karipuna	Tupian,					
+31	Karitiana	Tupian,					
+32	Puruborá	Tupian					
+33	Tuparí	Tupian,					
+34	Makuráp	Tupian,					
+35	Mekens(Sakiráp)	Tupian,					
+36	Wayuru(Ajurú)	Tupian,					
+37	Akuntsu(Ak?ts?)	Tupian,					
+38a	Aruá	Tupian,					
+38b	CintaLarga						
+38c	Gavião	430					
+39	Salamãi(Mondé)	Tupian,					
+40	Suruí-Paitér	Tupian,					
+41	Karo(Arara)	Tupian,					
+42	Aikanã(Masaká,	Unclassified					
+43	Kanoê(Kapixaná)	Unclassified					
+44	Kwazá(Koaiá)	Unclassified					
+45a	Irantxe	Unclassified					
+46	Canichana	Unclassified					
+47	Movima	Unclassified					
+48	Cayubaba	Unclassified					
+49	Itonama	Unclassified					
+50a	Mosetén	Unclassified					
+50b	Chimane						
+51	Leko	Unclassified					
+52	Yurakaré	Unclassified					
+53	Chiquitano(Besiro)	Unclassified					
+54	(unknown)	(unknown)					
+55	Akuntsu-Kanoê	Pidgin					
