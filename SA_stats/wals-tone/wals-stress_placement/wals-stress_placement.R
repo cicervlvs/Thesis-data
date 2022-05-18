@@ -1,4 +1,6 @@
 library(dplyr)
+library(tidyverse)
+library(ggplot2)
 
 languages <- read.delim("../languoid.txt",
                         fileEncoding = "UTF-8") %>% select(wals.code, macroarea)
@@ -22,6 +24,14 @@ fixed_simple <- fixed %>% mutate(alignment =
                                   description == "Third" ~ "Left"
                                 ))
 
+plot_fixed_alignment <- ggplot(fixed_simple,
+  aes(alignment))+
+  geom_bar(position =  "dodge", fill = "blue")+
+  labs(title = "Left vs right bound fixed stress systems in the languages of the world")+
+  theme_minimal()
+
+
+
 weight_simple <- weight %>% mutate(alignment =
                                 case_when(
                                   description == "Left-edge: First or second" |
@@ -33,13 +43,22 @@ weight_simple <- weight %>% mutate(alignment =
                                   ~ "Left",
                                   description == "Unbounded: Stress can be anywhere"
                                   ~ "Unbounded"
-                                ))
-
+                                )) %>%
+                            drop_na()
 
 fixed_and_weight <- bind_rows(weight_simple, fixed_simple) %>%
                   left_join(languages, by = "wals.code") %>%
                   filter(.$alignment == "Left" |
-                          .$alignment == "Right")
+                          .$alignment == "Right"|
+                          .$alignment == "Ubounded")
+
+
+plot_alignment <- ggplot(fixed_and_weight,
+  aes(alignment))+
+  geom_bar(position =  "dodge", fill = "blue")+
+  labs(title = "Left vs right bound stress systems in the languages of the world")+
+  theme_minimal()
+
 
 freq_tab_world <- table(fixed_and_weight$alignment)
 
@@ -64,8 +83,24 @@ fixed_window <- fixed_with_macro %>% mutate(rhythm =
                                   description == "Ultimate" |
                                   description == "Second" |
                                   description == "Third" ~ "Iambic",
-                                  description == "No Fixed Stress" ~ "No Fixed stress"
+                                  description == "No fixed stress" ~ "No fixed stress"
                                 ))
+
+
+plot_window <- ggplot(fixed_window,
+  aes(rhythm))+
+  geom_bar(position =  "dodge", fill = "blue")+
+  labs(title = "Left vs right internal window alignment in languages of the world with fixed stress")+
+  theme_minimal()
+
+fixed_window_costa <- data.frame(Left = 55,
+                                Right = 45)
+
+plot_window <- ggplot(fixed_window_costa,
+  aes(rhythm))+
+  geom_bar(position =  "dodge", fill = "blue")+
+  labs(title = "Left vs right internal window alignment in languages of the world with fixed stress")+
+  theme_minimal()
 
 fixed_window_sa <- fixed_window %>% filter(.$macroarea == "South America")
 
