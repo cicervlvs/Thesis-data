@@ -1,6 +1,7 @@
 library(dplyr)
 library(tidyverse)
 library(ggplot2)
+theme_set(theme_minimal())
 
 languages <- read.delim("../languoid.txt",
                         fileEncoding = "UTF-8") %>% select(wals.code, macroarea)
@@ -93,13 +94,12 @@ plot_window <- ggplot(fixed_window,
   labs(title = "Left vs right internal window alignment in languages of the world with fixed stress")+
   theme_minimal()
 
-fixed_window_costa <- data.frame(Left = 55,
-                                Right = 45)
+fixed_window_costa <- data.frame(Orientation = c(rep("Left", 55), rep("Right", 45)))
 
-plot_window <- ggplot(fixed_window_costa,
-  aes(rhythm))+
+plot_window_costa <- ggplot(fixed_window_costa,
+  aes(Orientation))+
   geom_bar(position =  "dodge", fill = "blue")+
-  labs(title = "Left vs right internal window alignment in languages of the world with fixed stress")+
+  labs(title = "Internal window alignment in languages of the world with fixed stress")+
   theme_minimal()
 
 fixed_window_sa <- fixed_window %>% filter(.$macroarea == "South America")
