@@ -3,15 +3,17 @@ library(tidyverse)
 library(ggplot2)
 theme_set(theme_minimal())
 
-languages <- read.delim("../languoid.txt",
+# Always set wd to Thesis-data
+
+languages <- read.delim("SA_stats/wals-tone/languoid.txt",
                         fileEncoding = "UTF-8") %>% select(wals.code, macroarea)
 
-fixed <- read.delim("fixed.txt",
+fixed <- read.delim("SA_stats/wals-stress_placement/fixed.txt",
                          fileEncoding = "UTF-8",
                          skip = 7) %>%
                          select(name, wals.code, description, family)
                          
-weight <- read.delim("weight.txt",
+weight <- read.delim("SA_stats/wals-stress_placement/weight.txt",
                     fileEncoding = "UTF-8",
                     skip = 7) %>% select(name, wals.code, description, family)
 

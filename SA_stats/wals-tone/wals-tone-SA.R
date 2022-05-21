@@ -1,10 +1,10 @@
 library(dplyr)
 
-languages <- read.delim("../languoid.txt",
+languages <- read.delim("SA_stats/wals-tone/languoid.txt",
   fileEncoding = "UTF-8"
 ) %>% select(wals.code, macroarea)
 
-tone_values <- read.delim("../tone.txt",
+tone_values <- read.delim("SA_stats/wals-tone/tone.txt",
   fileEncoding = "UTF-8",
   skip = 7
 ) %>%

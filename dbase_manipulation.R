@@ -47,8 +47,6 @@ addGlottocodeName <- function(db){
   print(.GlobalEnv$db$glottocode)
 }
 
-
-
 langs <- read.delim("langTable.txt")%>%
   select(Number, Language, Classification, Country)
 
