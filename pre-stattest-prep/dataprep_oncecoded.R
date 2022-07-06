@@ -41,7 +41,8 @@ get_n <- function(df, group_value){
   df %>%
     as.data.frame() %>%
     filter(group == group_value)%>%
-    select(n)
+    select(n)%>%
+    unlist()
 }
 
 get_pct <- function(df, group_value){
@@ -73,6 +74,22 @@ returns <- list("results" = output,
                 "report" = unlist(apa_style_report))
 
 returns
+}
+
+fish_guapmam <- function(df, control){
+  guapmam_values <- get_n(df, "Guaporé-Mamoré")%>%
+                    unlist()
+  
+  control_values <- get_n(df, control)%>%
+                    unlist()
+  
+  fish_input <- table(guapmam_values,
+                      control_values)
+  
+  output <- fisher.test(fish_input)
+  
+  output
+
 }
 
 remove_var <- function(df){
@@ -523,8 +540,33 @@ save_to_images("stress_type_guap_mam_grouped")
 chisq_stress_types_world <- chisq_guapmam(glottodata_stress_type_grouped,
                                           "World")
 
+stress_type_n_for_table_world <- bind_rows(glottodata_guapmam_for_stress_type_plot,
+                                             weight_for_stress_type_plot,
+                                             weight_for_stress_type_plot %>%
+                                               join_wals_SA()) %>%
+                                             make_three_groups()%>%
+                                             filter(group == "Guaporé-Mamoré" |
+                                                    group == "World")
+  
+stress_type_n_for_table_SA <- bind_rows(glottodata_guapmam_for_stress_type_plot,
+                                        weight_for_stress_type_plot,
+                                        weight_for_stress_type_plot %>%
+                                          join_wals_SA()) %>%
+  make_three_groups()%>%
+  filter(group == "Guaporé-Mamoré" |
+           group == "South America")
+
+fish_test_stress_types_world <- fisher.test(stress_type_n_for_table_world$stress.type.spaces,
+                                  stress_type_n_for_table_world$group)
+
+fish_test_stress_types_SA <- fisher.test(stress_type_n_for_table_SA$stress.type.spaces,
+                                  stress_type_n_for_table_SA$group)
+
 chisq_stress_types_SA <- chisq_guapmam(glottodata_stress_type_grouped,
                                       "South America")
+
+fish_test_stress_types_SA <- fish_guapmam(glottodata_stress_type_grouped,
+                                          "South America")
 
 #Tone
 
