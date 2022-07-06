@@ -2,6 +2,7 @@ library(dplyr)
 library(tidyverse)
 library(ggplot2)
 theme_set(theme_minimal())
+image_folder <- file.path("..", "Escrit", "Images")
 
 # Always set wd to Thesis-data
 
@@ -27,12 +28,17 @@ fixed_simple <- fixed %>% mutate(alignment =
                                   description == "Third" ~ "Left"
                                 ))
 
-plot_fixed_alignment <- ggplot(fixed_simple,
-  aes(alignment))+
-  geom_bar(position =  "dodge", fill = "blue")+
-  labs(title = "Left vs right bound fixed stress systems in the languages of the world")+
-  theme_minimal()
+fixed_nona <- fixed_simple %>%
+              filter(!is.na(alignment))
 
+plot_fixed_alignment <- ggplot(fixed_nona,
+  aes(alignment))+
+  geom_bar(position =  "dodge", fill = "cornflowerblue")+
+  labs(title = "Left vs right bound fixed stress systems in the languages of the world",
+       x = "Bind position")+
+  theme_minimal()
+ggsave("alignment_fixed.png",
+       path = file.path("..", "Escrit", "Images"))
 
 
 weight_simple <- weight %>% mutate(alignment =
@@ -58,9 +64,12 @@ fixed_and_weight <- bind_rows(weight_simple, fixed_simple) %>%
 
 plot_alignment <- ggplot(fixed_and_weight,
   aes(alignment))+
-  geom_bar(position =  "dodge", fill = "blue")+
-  labs(title = "Left vs right bound stress systems in the languages of the world")+
+  geom_bar(position =  "dodge", fill = "cornflowerblue")+
+  labs(title = "Left vs. right bound stress systems in the languages of the world",
+       x = "Bind position")+
   theme_minimal()
+ggsave("alignment_world.png",
+       path = image_folder)
 
 
 freq_tab_world <- table(fixed_and_weight$alignment)
@@ -89,20 +98,32 @@ fixed_window <- fixed_with_macro %>% mutate(rhythm =
                                   description == "No fixed stress" ~ "No fixed stress"
                                 ))
 
+fixed_window_forplot <- fixed_window %>%
+                             filter(rhythm != "No fixed stress") %>%
+                        mutate(rhythm_for_plot =
+                                 case_when(
+                                   rhythm == "Iambic" ~ "Left",
+                                   rhythm == "Trochaic" ~ "Right"))
+                       
 
-plot_window <- ggplot(fixed_window,
-  aes(rhythm))+
-  geom_bar(position =  "dodge", fill = "blue")+
-  labs(title = "Left vs right internal window alignment in languages of the world with fixed stress")+
+plot_window <- ggplot(fixed_window_forplot,
+  aes(rhythm_for_plot))+
+  geom_bar(position =  "dodge", fill = "cornflowerblue")+
+  labs(title = "Left vs. right internal window alignment in languages of the world with fixed stress",
+       x = "Window-internal alignment")+
   theme_minimal()
+ggsave("window_internal_alignment_world.png",
+       path = image_folder)
 
 fixed_window_costa <- data.frame(Orientation = c(rep("Left", 55), rep("Right", 45)))
 
 plot_window_costa <- ggplot(fixed_window_costa,
   aes(Orientation))+
-  geom_bar(position =  "dodge", fill = "blue")+
-  labs(title = "Internal window alignment in languages of the world with fixed stress")+
+  geom_bar(position =  "dodge", fill = "cornflowerblue")+
+  labs(title = "Internal window alignment in languages of South America with fixed stress")+
   theme_minimal()
+ggsave("window_internal_alignment_sa.png",
+       path = image_folder)
 
 fixed_window_sa <- fixed_window %>% filter(.$macroarea == "South America")
 
