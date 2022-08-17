@@ -51,7 +51,7 @@ plot_fixed_position_grouped <- ggplot(glottodata_fixed_grouped,
                                    y = "Rate") +
                               scale_fill_manual(values = cb_palette) +
                               theme_minimal()
-save_to_images("position_fixed_stress_grouped")
+save_to_image_folder("position_fixed_stress_grouped")
 
 #Presence of tone
 tone_for_grouping <- tone_simple %>%
@@ -83,7 +83,7 @@ plot_has_tone_grouped <- ggplot(glottodata_tone_grouped,
                                    x = "Has tone",
                                    y = "Rate") +
                               scale_fill_manual(values = cb_palette)
-save_to_images("tone_guap_mam_grouped")
+save_to_image_folder("tone_guap_mam_grouped")
 
 #Boundedness
 fixed_and_weight_for_plotting <- fixed_and_weight %>%
@@ -117,7 +117,7 @@ plot_boundedness_grouped <- ggplot(glottodata_boundedness_grouped,
                                    x = "Binding",
                                    y = "Rate") +
                               scale_fill_manual(values = cb_palette)
-save_to_images("alignment_grouped")
+save_to_image_folder("alignment_grouped")
                                   
 
 #Stress type
@@ -152,4 +152,4 @@ plot_stress_type_grouped <- ggplot(glottodata_stress_type_grouped,
                                    x = "Stress type",
                                    y = "Rate") +
                               scale_fill_manual(values = cb_palette)
-save_to_images("stress_type_guap_mam_grouped")
+save_to_image_folder("stress_type_guap_mam_grouped")

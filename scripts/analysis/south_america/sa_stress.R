@@ -80,12 +80,6 @@ prop_tab_sa <- prop.table(freq_tab_sa)
 
 # Proportions of placement within the window (trochaic or iambic)
 
-<<<<<<< HEAD:SA_stats/wals-stress_placement/wals-stress_placement.R
-fixed_with_macro  <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- fixed %>%
-                  left_join(languages, by = "wals.code")
-=======
->>>>>>> 2032525 (Restructuring of project, all but one script redone):scripts/analysis/south_america/sa_stress.R
-
 fixed_window <- fixed %>% mutate(rhythm =
                                 case_when(
                                   description == "Initial" |

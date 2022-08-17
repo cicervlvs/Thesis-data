@@ -1,6 +1,6 @@
-save_to_images <- function(name) {
+save_to_image_folder <- function(name) {
   image_folder <- here("scripts", "analysis", "images")
   ggsave(paste0(name, ".png"),
-    path = image_folder
+    path = file.path(image_folder)
   )
 }
