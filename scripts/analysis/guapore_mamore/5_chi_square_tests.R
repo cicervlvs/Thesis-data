@@ -6,23 +6,13 @@ source(here("scripts", "database_prep", "dataprep_oncecoded.R"))
 
 # Stress types
 
-guapmam_values <- glottodata_stress_type_grouped %>%
-  as.data.frame() %>%
-  dplyr::filter(group == "Guaporé-Mamoré") %>%
-  select(n)
-
-control_values <- glottodata_stress_type_grouped %>%
-  as.data.frame() %>%
-  dplyr::filter(group == "World") %>%
-  select(ends_with(".pct"))
-
-chisq.test(guapmam_values, p = control_values)
+chisq_stress_type_world  <- chisq_guapmam_world(glottodata_stress_type_grouped)
 
 stress_type_n_for_table_world <- bind_rows(
   glottodata_guapmam_for_stress_type_plot,
   weight_for_stress_type_plot,
   weight_for_stress_type_plot %>%
-    join_wals_SA()
+    select(!macroarea)
 ) %>%
   make_three_groups() %>%
   dplyr::filter(group == "Guaporé-Mamoré" |
@@ -32,10 +22,10 @@ stress_type_n_for_table_SA <- bind_rows(
   glottodata_guapmam_for_stress_type_plot,
   weight_for_stress_type_plot,
   weight_for_stress_type_plot %>%
-    join_wals_SA()
+    select(!macroarea)
 ) %>%
   make_three_groups() %>%
-  filter(group == "Guaporé-Mamoré" |
+  dplyr::filter(group == "Guaporé-Mamoré" |
     group == "South America")
 
 fish_test_stress_types_world <- fisher.test(
@@ -48,9 +38,8 @@ fish_test_stress_types_SA <- fisher.test(
   stress_type_n_for_table_SA$group
 )
 
-chisq_stress_types_SA <- chisq_guapmam(
-  glottodata_stress_type_grouped,
-  "South America"
+chisq_stress_types_SA <- chisq_guapmam_SA(
+  glottodata_stress_type_grouped
 )
 
 fish_test_stress_types_SA <- fish_guapmam(
@@ -60,23 +49,19 @@ fish_test_stress_types_SA <- fish_guapmam(
 
 # Tone
 
-chisq_tone_world <- chisq_guapmam(
-  glottodata_tone_grouped,
-  "World"
+chisq_tone_world <- chisq_guapmam_world(
+  glottodata_tone_grouped
 )
 
-chisq_tone_SA <- chisq_guapmam(
-  glottodata_tone_grouped,
-  "South America"
+chisq_tone_SA <- chisq_guapmam_SA(
+  glottodata_tone_grouped
 )
 # Boundedness
 
-chisq_boundedness_world <- chisq_guapmam(
-  glottodata_boundedness_grouped,
-  "World"
+chisq_boundedness_world <- chisq_guapmam_world(
+  glottodata_boundedness_grouped
 )
 
-chisq_boundedness_SA <- chisq_guapmam(
-  glottodata_boundedness_grouped,
-  "South America"
+chisq_boundedness_SA <- chisq_guapmam_SA(
+  glottodata_boundedness_grouped
 )

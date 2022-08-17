@@ -25,7 +25,8 @@ glottodata_fixed_grouped <- bind_rows(glottodata_guapmam %>%
                                                  fixed.stress.position == "antepenultimate" ~ "Antepenultimate",
                                                  fixed.stress.position == "penultimate" ~ "Penultimate",
                                                  fixed.stress.position == "final" ~ "Ultimate")),
-                                   fixed_for_grouping,
+                                   fixed_for_grouping %>%
+                                    select(!macroarea),
                                    fixed_for_grouping %>%
                                      dplyr::filter(.$macroarea == "South America")) %>%
                                  make_three_groups() %>%
@@ -60,7 +61,8 @@ tone_for_grouping <- tone_simple %>%
                                  has.tone == "no tone" ~ "no"))
 
 glottodata_tone_grouped <- bind_rows(glottodata_guapmam,
-                                     tone_for_grouping,
+                                     tone_for_grouping %>%
+  select(!macroarea),
                                      tone_for_grouping %>%
                             dplyr::filter(.$macroarea == "South America")) %>%
                             make_three_groups() %>%
@@ -96,7 +98,8 @@ glottodata_guapmam_for_boundedness_plot <- glottodata_guapmam %>%
                                               dplyr::filter(!is.na(.$bound.window))
 
 glottodata_boundedness_grouped <- bind_rows(glottodata_guapmam_for_boundedness_plot,
-                                            fixed_and_weight_for_plotting,
+                                            fixed_and_weight_for_plotting %>%
+  select(!macroarea),
                                             fixed_and_weight_for_plotting %>%
                                 dplyr::filter(.$macroarea == "South America")) %>%
                                 make_three_groups() %>%
@@ -130,7 +133,8 @@ glottodata_guapmam_for_stress_type_plot <- glottodata_guapmam %>%
                                           dplyr::filter(stress.type.spaces != "No stress")
 
 glottodata_stress_type_grouped <- bind_rows(glottodata_guapmam_for_stress_type_plot,
-                                            weight_for_stress_type_plot,
+                                            weight_for_stress_type_plot %>%
+                                               select(!macroarea),
                                             weight_for_stress_type_plot %>%
                                      dplyr::filter(.$macroarea == "South America")) %>%
                                  make_three_groups() %>%
