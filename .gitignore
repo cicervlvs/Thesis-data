@@ -1,3 +1,10 @@
+#Debugging folder
+Debug/
+
+#Irrelevant stuff
+extra/
+
+## FROM GITHUB FILE
 # History files
 .Rhistory
 .Rapp.history
@@ -34,9 +41,5 @@ vignettes/*.pdf
 *.knit.md
 
 # Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html
-rsconnect/
 *.Rproj
-
-#excel spreadsheet
-
-*.xlsx
+rsconnect/
