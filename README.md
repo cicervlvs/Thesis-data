@@ -10,4 +10,4 @@ Contains data used for my MA thesis. First, some scripts for background informat
 - Analysis of the dataset, including visualization and statistical tests, in the [dataprep_oncecoded](scripts/analysis/guapore-mamore) folder.
 - Resulting plots and maps in the [images](scripts/analysis/images) folder.
 
-The text of my thesis can be found [here]{https://studenttheses.universiteitleiden.nl/handle/1887/3453814}.
+The text of my thesis can be found [here](https://studenttheses.universiteitleiden.nl/handle/1887/3453814).
